@@ -81,7 +81,7 @@
             android:layout_below="@id/child_activity_summary"
             android:layout_marginTop="20dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/ryansimon" />
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -16,10 +16,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedItemViewHolder> {
 
-    private List<String> mFeedItems;
+    private List<FeedItem> mFeedItems;
     private static final int FIRST_AND_LAST_CARD_MARGIN = 4;
 
-    public FeedItemAdapter(List<String> feedItems) {
+    public FeedItemAdapter(List<FeedItem> feedItems) {
         mFeedItems = feedItems;
     }
 
@@ -33,7 +33,21 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
     @Override
     public void onBindViewHolder(FeedItemViewHolder holder, int position) {
 
-        holder.getChildAction().setText(mFeedItems.get(position));
+        FeedItem feedItem = mFeedItems.get(position);
+        holder.getChildAction().setText(feedItem.getChildName() + " " + feedItem.getActivity());
+        holder.getChildImage().setImageResource(feedItem.getChildImage());
+        holder.getActivityDate().setText(feedItem.getTimeStamp());
+        holder.getRoomNumber().setText("Room " + feedItem.getRoomNumber());
+
+        // show content image if there's one available...
+        if(feedItem.getContentImage() != null) {
+            holder.getContentImage().setVisibility(View.VISIBLE);
+            holder.getContentImage().setImageResource(feedItem.getContentImage());
+        }
+        // otherwise, hide the ImageView
+        else {
+            holder.getContentImage().setVisibility(View.GONE);
+        }
 
         // add a top margin to the first item
         if(position == 0) {
@@ -66,7 +80,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
         private TextView mRoomNumber;
         private TextView mActivityDate;
         private CircleImageView mChildImage;
-        private ImageView mFeedImage;
+        private ImageView mContentImage;
         private View mRowContainer;
 
         public FeedItemViewHolder(View itemView) {
@@ -77,7 +91,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
             mRoomNumber = (TextView) itemView.findViewById(R.id.room_number_tv);
             mActivityDate = (TextView) itemView.findViewById(R.id.activity_date_tv);
             mChildImage = (CircleImageView) itemView.findViewById(R.id.child_image);
-            mFeedImage = (ImageView) itemView.findViewById(R.id.feed_image);
+            mContentImage = (ImageView) itemView.findViewById(R.id.feed_image);
             mRowContainer = itemView;
         }
 
@@ -113,12 +127,12 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
             mChildImage = childImage;
         }
 
-        public ImageView getFeedImage() {
-            return mFeedImage;
+        public ImageView getContentImage() {
+            return mContentImage;
         }
 
-        public void setFeedImage(ImageView feedImage) {
-            mFeedImage = feedImage;
+        public void setContentImage(ImageView contentImage) {
+            mContentImage = contentImage;
         }
 
         public View getRowContainer() {
