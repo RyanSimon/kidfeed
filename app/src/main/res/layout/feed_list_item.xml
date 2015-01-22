@@ -6,6 +6,8 @@
     app:cardUseCompatPadding="true"
     app:cardElevation="3dp"
     app:cardCornerRadius="4dp"
+    app:contentPaddingLeft="-2dp"
+    app:contentPaddingRight="-2dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp">
 
