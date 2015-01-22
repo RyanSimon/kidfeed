@@ -3,8 +3,14 @@ package me.ryansimon.kidfeed;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class FeedActivity extends ActionBarActivity {
@@ -13,6 +19,18 @@ public class FeedActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+
+        List<String> feedItems = Arrays.asList(
+                "Ryan ate poop",
+                "Ryan threw poop at teacher",
+                "Ryan got an A"
+        );
+
+        RecyclerView recList = (RecyclerView) findViewById(R.id.feed_list);
+        recList.setAdapter(new FeedItemAdapter(feedItems));
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
     }
 
 
