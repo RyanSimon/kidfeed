@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,7 +28,7 @@ public class FeedActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
-        getSupportActionBar().setTitle(getString(R.string.title_activity_feed));
+        setupToolbar();
 
         setupContentList();
     }
@@ -71,6 +72,12 @@ public class FeedActivity extends ActionBarActivity {
                 feedItem2,
                 feedItem1
         );
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.title_activity_feed));
     }
 
     private void setupContentList() {

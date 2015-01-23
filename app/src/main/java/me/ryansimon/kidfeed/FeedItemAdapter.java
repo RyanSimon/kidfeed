@@ -49,20 +49,23 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
             holder.getContentImage().setVisibility(View.GONE);
         }
 
+        View rowContainer = holder.getRowContainer();
+        RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) rowContainer.getLayoutParams();
         // add a top margin to the first item
         if(position == 0) {
-            View rowContainer = holder.getRowContainer();
-            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) rowContainer.getLayoutParams();
             layoutParams.setMargins(layoutParams.leftMargin,
                     Helper.dpToPixels(FIRST_AND_LAST_CARD_MARGIN,rowContainer.getContext()),
-                    layoutParams.rightMargin, layoutParams.bottomMargin);
+                    layoutParams.rightMargin, 0);
         }
         // add a bottom margin to the last item
         else if(position == mFeedItems.size() - 1) {
-            View rowContainer = holder.getRowContainer();
-            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) rowContainer.getLayoutParams();
-            layoutParams.setMargins(layoutParams.leftMargin, layoutParams.topMargin,
+            layoutParams.setMargins(layoutParams.leftMargin, 0,
                     layoutParams.rightMargin, Helper.dpToPixels(FIRST_AND_LAST_CARD_MARGIN,rowContainer.getContext()));
+        }
+        // normal margins should be applied
+        else {
+            layoutParams.setMargins(layoutParams.leftMargin, 0,
+                    layoutParams.rightMargin, 0);
         }
     }
 
