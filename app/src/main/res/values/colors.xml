@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme colors -->
+    <color name="primaryColor">#00BCD4</color>
+    <color name="primaryColorDark">#0097A7</color>
+    <color name="primaryAccent">#40C4FF</color>
+
+    <!-- General colors -->
+    <color name="black">#000000</color>
+
+    <!-- Feed -->
+    <color name="feedDate">#B0BEC5</color>
+</resources>

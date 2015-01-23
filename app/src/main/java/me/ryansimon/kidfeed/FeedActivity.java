@@ -1,7 +1,9 @@
 package me.ryansimon.kidfeed;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,30 +27,9 @@ public class FeedActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        getSupportActionBar().setTitle(getString(R.string.title_activity_feed));
+
         setupContentList();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_feed, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void createMockContent() {
@@ -66,13 +47,25 @@ public class FeedActivity extends ActionBarActivity {
         FeedItem feedItem2 = new FeedItem(mChildNameImagePairs.get(1).first,"did great on quiz",
                 "1/21/2015, 11:32 AM",1,mChildNameImagePairs.get(1).second,mChildNameImagePairs.get(1).second);
 
-        FeedItem feedItem3 = new FeedItem(mChildNameImagePairs.get(2).first,"finished homework",
-                "1/22/2015, 9:09 AM",1,mChildNameImagePairs.get(2).second,null);
+        FeedItem feedItem3 = new FeedItem(mChildNameImagePairs.get(2).first,"started homework",
+                "1/22/2015, 9:09 AM",2,mChildNameImagePairs.get(2).second,null);
 
-        FeedItem feedItem4 = new FeedItem(mChildNameImagePairs.get(2).first,"ate lunch",
-                "1/22/2015, 12:11 PM",1,mChildNameImagePairs.get(2).second,null);
+        FeedItem feedItem4 = new FeedItem(mChildNameImagePairs.get(2).first,"finished homework",
+                "1/22/2015, 12:11 PM",2,mChildNameImagePairs.get(2).second,null);
+
+        FeedItem feedItem5 = new FeedItem(mChildNameImagePairs.get(3).first,"played on the swing",
+                "1/23/2015, 1:23 PM",1,mChildNameImagePairs.get(3).second,null);
+
+        FeedItem feedItem6 = new FeedItem(mChildNameImagePairs.get(4).first,"is in time out",
+                "1/23/2015, 3:45 PM",3,mChildNameImagePairs.get(4).second,null);
+
+        FeedItem feedItem7 = new FeedItem(mChildNameImagePairs.get(0).first,"was in a photo",
+                "1/24/2015, 10:03 AM",1,mChildNameImagePairs.get(0).second,R.drawable.johnny_poop);
 
         mFeedItems = Arrays.asList(
+                feedItem7,
+                feedItem6,
+                feedItem5,
                 feedItem4,
                 feedItem3,
                 feedItem2,
