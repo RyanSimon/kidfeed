@@ -1,27 +1,38 @@
 package me.ryansimon.kidfeed;
 
-import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @author Ryan Simon
+ *
+ * Main activity of the app. Displays a list of {@link me.ryansimon.kidfeed.FeedItem}'s.
+ *
+ * This Activity uses some of the new appcompat libraries in Lollipop:
+ * {@link android.support.v7.widget.CardView}, {@link android.support.v7.widget.RecyclerView},
+ * and {@link android.support.v7.widget.Toolbar}
+ */
 public class FeedActivity extends ActionBarActivity {
+
+    /**
+     * Layout vars
+     */
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     // mock content
     List<Pair<String,Integer>> mChildNameImagePairs;
     List<FeedItem> mFeedItems;
+
+    /***** ACTIVITY LIFECYCLE METHODS *****/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +40,15 @@ public class FeedActivity extends ActionBarActivity {
         setContentView(R.layout.activity_feed);
 
         setupToolbar();
-
+        setupSwipeToRefresh();
         setupContentList();
     }
 
+    /***** HELPER METHODS *****/
+
+    /**
+     * Creates a few mock items in place of actual server content
+     */
     private void createMockContent() {
         mChildNameImagePairs = Arrays.asList(
                 new Pair<String, Integer>("Johnny",R.drawable.child1),
@@ -74,12 +90,36 @@ public class FeedActivity extends ActionBarActivity {
         );
     }
 
+    /**
+     * Sets up Toolbar and the title of the Activity
+     */
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.title_activity_feed));
     }
 
+    /**
+     * Sets up swipe to refresh with an artificial delay for demo purposes
+     */
+    private void setupSwipeToRefresh() {
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // faking a server refresh
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 4000);
+            }
+        });
+    }
+
+    /**
+     * Sets up the content list
+     */
     private void setupContentList() {
         // do this first, so we have items to give our RecyclerView
         createMockContent();

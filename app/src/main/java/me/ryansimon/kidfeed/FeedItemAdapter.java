@@ -33,6 +33,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
     @Override
     public void onBindViewHolder(FeedItemViewHolder holder, int position) {
 
+        // set our Views
         FeedItem feedItem = mFeedItems.get(position);
         holder.getChildAction().setText(feedItem.getChildName() + " " + feedItem.getActivity());
         holder.getChildImage().setImageResource(feedItem.getChildImage());
@@ -51,6 +52,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedIt
 
         View rowContainer = holder.getRowContainer();
         RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) rowContainer.getLayoutParams();
+
         // add a top margin to the first item
         if(position == 0) {
             layoutParams.setMargins(layoutParams.leftMargin,
