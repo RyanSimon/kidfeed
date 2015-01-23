@@ -42,4 +42,5 @@ release.properties
 # Java class files
 *.class
 
+manifest-merger-debug-report.txt
 atlassian-ide-plugin.xml
